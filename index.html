@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='smApp'>
+        <head>
+            <meta charset="utf-8">
+            <title>Title</title>
+            <meta name="description" content="">
+            <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+            <link rel="stylesheet" href="css/reset.css">
+            <link rel="stylesheet" href="css/ngDialog.css">
+            <link rel="stylesheet" href="css/ngDialog-Default.css">
+            <link rel="stylesheet" href="css/Style.css">
+
+            <!--[if IE]>
+                <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+        </head>
+        <body ng-controller="MainCtrl">
+
+            <button type="button" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-class="ngdialog-theme-default" ng-dialog-show-close="false">Open via directive</button>
+
+            <a href="#" ng-click="openDefault()">Default theme</a>
+
+            <script type="text/ng-template" id="firstDialogId">
+            	<div class="ngdialog-message">
+            		<h3>ngDialog template</h3>
+            		<p>Test content for <code>{{theme}}</code></p>
+            	</div>
+            	<div class="ngdialog-buttons">
+            		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
+            	</div>
+            </script>
+        </body>
+        <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js'></script>
+        <script src='js/ngDialog.js'></script>
+        <script type="text/javascript">
+        	var app = angular.module('smApp', ['ngDialog']);
+
+        	app.controller('MainCtrl', function ($scope, $rootScope, ngDialog) {
+        		$scope.open = function () {
+        			ngDialog.open({ template: 'firstDialogId', controller: 'InsideCtrl' });
+        		};
+
+        		$scope.openDefault = function () {
+        			$rootScope.theme = 'ngdialog-theme-default';
+
+        			ngDialog.open({
+        				template: 'firstDialogId',
+        				controller: 'InsideCtrl',
+        				className: 'ngdialog-theme-default'
+        			});
+        		};
+
+        	});
+
+        	app.controller('InsideCtrl', function ($scope, ngDialog) {
+        		$scope.openSecond = function () {
+        			ngDialog.open({
+        				template: '<a href="#" ng-click="closeSecond()">Close here</a>',
+        				plain: true,
+        				closeByEscape: false,
+        				controller: 'SecondModalCtrl'
+        			});
+        		};
+        	});
+
+        	app.controller('SecondModalCtrl', function ($scope, ngDialog) {
+        		$scope.closeSecond = function () {
+        			ngDialog.close();
+        		};
+        	});
+
+        </script>
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+</html>
