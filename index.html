@@ -8,6 +8,7 @@
             <link rel="stylesheet" href="css/reset.css">
             <link rel="stylesheet" href="css/ngDialog.css">
             <link rel="stylesheet" href="css/ngDialog-Default.css">
+            <link rel="stylesheet" href="css/topcoat-desktop-dark.css">
             <link rel="stylesheet" href="css/Style.css">
 
             <!--[if IE]>
@@ -15,20 +16,27 @@
             <![endif]-->
         </head>
         <body ng-controller="MainCtrl">
+            <div id="container">
+                <div class="topcoat-button-bar">
+                  <div class="topcoat-button-bar__item">
+                    <button class="topcoat-button-bar__button--large" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-class="ngdialog-theme-default" ng-dialog-show-close="false">Directive</button>
+                  </div>
+                  <div class="topcoat-button-bar__item">
+                    <button class="topcoat-button-bar__button--large" ng-click="openDefault()">Default</button>
+                  </div>
+                </div>
+               
 
-            <button type="button" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-class="ngdialog-theme-default" ng-dialog-show-close="false">Open via directive</button>
-
-            <a href="#" ng-click="openDefault()">Default theme</a>
-
-            <script type="text/ng-template" id="firstDialogId">
-            	<div class="ngdialog-message">
-            		<h3>ngDialog template</h3>
-            		<p>Test content for <code>{{theme}}</code></p>
-            	</div>
-            	<div class="ngdialog-buttons">
-            		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
-            	</div>
-            </script>
+                <script type="text/ng-template" id="firstDialogId">
+                	<div class="ngdialog-message">
+                		<h3>Template</h3>
+                		<p>Test content for</p>
+                	</div>
+                	<div class="ngdialog-buttons">
+                		<button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openSecond()">Open next</button>
+                	</div>
+                </script>
+            </div> 
         </body>
         <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js'></script>
         <script src='js/ngDialog.js'></script>
